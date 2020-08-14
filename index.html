@@ -4,8 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            animation-name: mymove;
+            animation-name: example;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+            }
+
+        @keyframes example {
+        0%{background-color: rgb(53, 0, 226);}
+        25%{background-color: rgb(183, 0, 255);}
+        50%{background-color: rgb(76, 0, 255);}
+        75%{background-color: rgb(0, 26, 255);}
+        100% {background-color: rgb(0, 15, 226);}
+        }
+        h1{
+            color: white;
+        }
+        .center{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        }
+        .btn {
+  background-color: #f4511e;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.btn:hover {opacity: 0.6}
+        .center2{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+    </style>
 </head>
 <body>
+<section class="center">
+    <h1>computer's choice--: <span id="compChoice"></span></h1>
+    <h1>your choice--: <span id="userChoice"></span></h1>
+    <h1>result--: <span id="result"></span></h1>
+</section>
+   <section class="center2">
+    <button class="choices btn" id="rock">rock</button>
+    <button class="choices btn" id="paper">paper</button>
+    <button class="choices btn" id="scissor">scissor</button>
+
+   </section>
+    <script>
+        let userChosen;
+        let computerChosen;
+        const displayResult = document.getElementById('result');
+        const userChoice = document.getElementById('userChoice');
+        var result = results();
+        const possibleChoices = document.querySelectorAll('.choices');
+        const computerChoice = document.getElementById('compChoice');
+        const randomNumber = Math.round(Math.random() * (3) );
+        console.log(randomNumber);
+    // Get users userChoice
+        possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
+        userChosen = e.target.id;
+        generatedComputerChoice();
+        results();
+        userChoice.innerHTML = userChosen;
+        computerChoice.innerHTML = computerChosen;
+        displayResult.innerHTML = result;
+        }))
+
+
+
+    //Get a random computers choice
+    function generatedComputerChoice() {
+        if (randomNumber === 1) {
+            return computerChosen = 'rock';
+        } else if (randomNumber === 2) {
+            return computerChosen = 'paper';
+        } else if (randomNumber === 3) {
+            return computerChosen = 'scissors';
+        }
+        else if (randomNumber == 0) {
+            return computerChosen = 'scissors';
+        }
+    }
     
+
+    function results() {
+        if (computerChosen == userChosen) {
+            return result = 'There was a tie';
+        } else if (computerChosen === 'rock' && userChosen === 'paper') {
+            return result = 'you lost';
+        } else if (computerChosen === 'rock' && userChosen === 'scissors') {
+            return result = 'you win!';
+        } else if (computerChosen === 'paper' && userChosen === 'rock') {
+            return result = 'you lost';
+        } else if (computerChosen === 'paper' && userChosen === 'scissors') {
+            return result = 'you win!';
+        } else if (computerChosen === 'scissors' && userChosen === 'rock') {
+            return result = 'you win!';
+        } else if (computerChosen === 'scissors' && userChosen === 'paper') {
+            return result = 'you lost';
+        }
+    }
+    </script>
 </body>
 </html>
